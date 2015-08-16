@@ -1,14 +1,14 @@
-require "HighriseC/RM/client/version"
+require "HighriseCRM/client/version"
 require "httparty"
 require "gyoku"
 
 module HighriseCRM
   class Client
-    attr_reader :token, :user
+    attr_reader :token, :base_site
 
-    def initialize(user, token)
+    def initialize(base_site, token)
       @token = token
-      @user = user
+      @base_site = base_site
     end
 
     def ping
@@ -24,12 +24,16 @@ module HighriseCRM
       get_request("me")
     end
 
+    def users(page = 1)
+      get_request("users", "page=#{page}")
+    end
+
     def custom_fields(page = 1)
       get_request("subject_fields", "page=#{page}")
     end
 
-    def users(page = 1)
-      get_request("users", "page=#{page}")
+    def base_sites(page = 1)
+      get_request("base_sites", "page=#{page}")
     end
 
     def create_person(data, endpoint = "people")
@@ -39,11 +43,11 @@ module HighriseCRM
     private
 
     def uri_generator(endpoint, options = "")
-      "#{@user}/#{endpoint}.xml?#{options}"
+      "#{@base_site}/#{endpoint}.xml?#{options}"
     end
 
     def get_request(endpoint, options = "")
-      response = HTTParty.get(uri_generator(endpoint,options),
+      HTTParty.get(uri_generator(endpoint,options),
         {
           :headers => { "User-Agent" => "Wishpond" },
           :basic_auth => { :username => "#{@token}", :password => 'X' }
