@@ -16,20 +16,28 @@ module HighriseCRM
       response.code == 200
     end
 
-    def people(page = 1)
-      get_request("people", "page=#{page}")
+    def people(offset = 0)
+      get_request("people", "n={offset}")
+    end
+
+    def people_with_filter(filter_option)
+      get_request("people", filter_option)
     end
 
     def me
       get_request("me")
     end
 
+    def account
+      get_request("account")
+    end
+
     def users(page = 1)
       get_request("users", "page=#{page}")
     end
 
-    def custom_fields(page = 1)
-      get_request("subject_fields", "page=#{page}")
+    def custom_fields
+      get_request("subject_fields")
     end
 
     def base_sites(page = 1)
@@ -38,6 +46,10 @@ module HighriseCRM
 
     def create_person(data, endpoint = "people")
       post_request(data, endpoint)
+    end
+
+    def update_person(data, id = 0, option = "reload=true")
+      put_request(data, "people/#{id}", option)
     end
 
     private
@@ -64,7 +76,16 @@ module HighriseCRM
       response = HTTParty.post(uri,
         :headers => { "User-Agent" => "Wishpond", "Content-type" => "application/xml" },
         :basic_auth => { :username => "#{@token}", :password  => 'X' },
-        :body => conver_to_xml(data)
+        :body => convert_to_xml(data)
+      )
+    end
+
+    def put_request(data, endpoint, options = "")
+      uri = uri_generator(endpoint, options)
+      response = HTTParty.put(uri,
+        :headers => { "User-Agent" => "Wishpond", "Content-type" => "application/xml" },
+        :basic_auth => { :username => "#{@token}", :password  => 'X' },
+        :body => convert_to_xml(data)
       )
     end
   end
