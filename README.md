@@ -10,6 +10,7 @@ This Gem supports the following **Highrise CRM API** methods:
 * Users
 * Custom Fields
 * Me
+*Account
 
 
 All methods in this gem use **XML** formatting to send the request, however Gyoku "(https://github.com/savonrb/gyoku)" is used to transform the hash data to xml before the request is sent. To read on the Highrise API please visit (https://github.com/basecamp/highrise-api)
