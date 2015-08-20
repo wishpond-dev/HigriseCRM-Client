@@ -2,7 +2,7 @@
 
 This gem is designed to communicate with the *Highrise CRM API*
 through instantiation of the main class **HighriseCRM::Client**.
-To instantiate you need the base site and the api token from a Highrise account.
+To instantiate you need the base site and the API token from a Highrise account.
 
 This Gem supports the following **Highrise CRM API** methods:
 
@@ -13,7 +13,7 @@ This Gem supports the following **Highrise CRM API** methods:
 *Account
 
 
-All methods in this gem use **XML** formatting to send the request, however Gyoku "(https://github.com/savonrb/gyoku)" is used to transform the hash data to xml before the request is sent. To read on the Highrise API please visit (https://github.com/basecamp/highrise-api)
+All methods in this gem use **XML** formatting to send the request, however Gyoku "(https://github.com/savonrb/gyoku)" is used to transform the hash data to XML before the request is sent. To read on the Highrise API please visit (https://github.com/basecamp/highrise-api)
 
 ## Installation
 
@@ -59,7 +59,7 @@ To create a person on *Highrise*:
 ```ruby
 client.create_person(person)
 ```
-The person parameter is a hash representing the xml in (https://github.com/basecamp/highrise-api/blob/master/sections/people.md).
+The person parameter is a hash representing the XML in (https://github.com/basecamp/highrise-api/blob/master/sections/people.md).
 
 
 ## Contributing
