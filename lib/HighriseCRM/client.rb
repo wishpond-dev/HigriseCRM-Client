@@ -17,7 +17,7 @@ module HighriseCRM
     end
 
     def people(offset = 0)
-      get_request("people", "n={offset}")
+      get_request("people", "n=#{offset}")
     end
 
     def person_with_filter(filter_option)
