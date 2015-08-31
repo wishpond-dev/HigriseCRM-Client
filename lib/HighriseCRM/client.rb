@@ -13,7 +13,14 @@ module HighriseCRM
 
     def ping
       response = me
-      response.code == 200
+      if response.code == 200
+        response.message
+      else
+        puts response.message
+        puts response.code
+        puts response.body
+        return false
+      end
     end
 
     def people(offset = 0)
@@ -48,7 +55,7 @@ module HighriseCRM
       post_request(data, endpoint)
     end
 
-    def update_person(data, id = 0, option = "reload=true")
+    def update_person(data, id, option = "reload=true")
       put_request(data, "people/#{id}", option)
     end
 
