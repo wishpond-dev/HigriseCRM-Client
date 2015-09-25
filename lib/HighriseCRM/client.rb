@@ -13,14 +13,7 @@ module HighriseCRM
 
     def ping
       response = me
-      if response.code == 200
-        response.message
-      else
-        puts response.message
-        puts response.code
-        puts response.body
-        return false
-      end
+      response.code == 200
     end
 
     def people(offset = 0)
